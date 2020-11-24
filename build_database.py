@@ -3,22 +3,23 @@ from config import db
 from models import Person
 
 # Data to initialize database with
-People = [
-  {'fname': 'Doug', 'lname': 'Farrell'},
-  {'fname': 'Kent', 'lname': 'Brockman'},
-  {'fname': 'Bunny','lname': 'Easter'}
+PEOPLE = [
+    {"fname": "Doug", "lname": "Farrell"},
+    {"fname": "Kent", "lname": "Brockman"},
+    {"fname": "Bunny", "lname": "Easter"},
+    {"fname": "Bob", "lname": "Jones"},
 ]
 
 # Delete database file if it exists currently
-if os.path.exists('people.db'):
-  os.remove('people.db')
+if os.path.exists("people.db"):
+    os.remove("people.db")
 
 # Create the database
 db.create_all()
 
-# Iterate over the <code>People</code> structure and populate the database
-for person in People:
-  p = Person(lname=person['lname'], fname=person['fname'])
-  db.session.add(p)
+# iterate over the PEOPLE structure and populate the database
+for person in PEOPLE:
+    p = Person(lname=person.get("lname"), fname=person.get("fname"))
+    db.session.add(p)
 
 db.session.commit()
